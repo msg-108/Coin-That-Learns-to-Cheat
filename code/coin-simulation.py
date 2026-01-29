@@ -42,7 +42,7 @@ for i in range(N):
         recent_outcomes.clear()
 
 # Plotting
-plt.plot(p_history)
+plt.plot([k*i for i in range(len(p_history))], p_history)
 plt.xlabel('Toss number')
 plt.ylabel('Estimated probability of heads')
 plt.title('Coin That Learns to Cheat')
