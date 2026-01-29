@@ -36,6 +36,8 @@ for i in range(N):
         else:
             pass
 
+        p = min(max(p, 0), 1)
+
         p_history.append(p)
         recent_outcomes.clear()
 
