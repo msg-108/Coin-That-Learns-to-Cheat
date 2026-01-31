@@ -14,6 +14,7 @@ while True:
 
 head_prob = .5 # initial probability of heads
 alpha = .05 #significance level
+epsilon = 0.01 # prevents probability = 0 or 1
 fraction = 0.05 
 interval = min(max(round(total_tosses * fraction), 1), 100) # update interval
 window = interval # window size
@@ -44,7 +45,7 @@ for i in range(total_tosses):
         else:
             pass
 
-        head_prob = min(max(head_prob, 0), 1)
+        head_prob = min(max(head_prob, epsilon), 1 - epsilon)
 
         prob_history.append(head_prob)
         recent_outcomes.clear()
