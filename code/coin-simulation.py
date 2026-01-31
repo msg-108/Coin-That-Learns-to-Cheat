@@ -5,27 +5,27 @@ import matplotlib.pyplot as plt
 # Parameters 
 while True:
     try:
-        N = int(input("Total number of tosses: "))
-        if N <= 0:
+        total_tosses = int(input("Total number of tosses: "))
+        if total_tosses <= 0:
             raise ValueError
         break
     except ValueError:
-        print("N must be a positive integer")
+        print("Total tosses must be a positive integer")
 
-p = .5 # initial probability of heads
+head_prob = .5 # initial probability of heads
 alpha = .05 #significance level
-k = 5 # update interval
-window = k # window size
+interval = 5 # update interval
+window = interval # window size
 
 # State variables
 recent_outcomes = [] 
-p_history = []
+prob_history = []
 
 #Simulation loop
-for i in range(N):
+for i in range(total_tosses):
     random_number = random.random() # Generates a random float between 0.0 and 1.0
 
-    if random_number <= p:
+    if random_number <= head_prob:
         outcome = 1 # heads
     else:
         outcome = 0 # tails
@@ -37,19 +37,19 @@ for i in range(N):
         tail_count = recent_outcomes.count(0)
         
         if head_count > tail_count:
-            p = p + alpha
+            head_prob = head_prob + alpha
         elif head_count < tail_count:
-            p = p - alpha
+            head_prob = head_prob - alpha
         else:
             pass
 
-        p = min(max(p, 0), 1)
+        head_prob = min(max(head_prob, 0), 1)
 
-        p_history.append(p)
+        prob_history.append(head_prob)
         recent_outcomes.clear()
 
 # Plotting
-plt.plot([k*i for i in range(len(p_history))], p_history)
+plt.plot([interval*i for i in range(len(prob_history))], prob_history)
 plt.xlabel('Toss number')
 plt.ylabel('Estimated probability of heads')
 plt.title('Coin That Learns to Cheat')
