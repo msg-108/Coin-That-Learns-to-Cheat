@@ -14,7 +14,8 @@ while True:
 
 head_prob = .5 # initial probability of heads
 alpha = .05 #significance level
-interval = 5 # update interval
+fraction = 0.05 
+interval = min(max(round(total_tosses * fraction), 1), 100) # update interval
 window = interval # window size
 
 # State variables
